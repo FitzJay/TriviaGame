@@ -1,161 +1,65 @@
+$(document).ready(function(){
+
+  var questionsandAnswers = [{
+	  question: "what year did the diamondbacks have their inargural season?",
+      ans1: "1997",
+      ans2: "1998",
+      ans3: "2003",
+      ans4: "2002",
+  },
+    {
+    question: "Who was the original manager of the Diamondbacks?",
+      ans1: "Buck Showalter",
+      ans2: "Show Buckwalter",
+      ans3: "Bob Brenly",
+      ans4: "Tony Luvello",
+  },
+    {
+    question: "What year did the Diamondbacks win the world series?",
+      ans1: "1999",
+      ans2: "2001",
+      ans3: "2000",
+      ans4: "2002",
+  },
+    {
+    question: "What batter hit the game winning hit in that World Series?",
+      ans1: "Luis Gonzalez",
+      ans2: "Jay Bell",
+      ans3: "Mark Grace",
+      ans4: "Matt Williams",
+  },
+    {
+    question: "What are the original colors of the Diamondbacks?",
+      ans1: "Green and Red",
+      ans2: "Red and Gold",
+      ans3: "Purple and Teal",
+      ans4: "Pink and Glitter",
+  }],
+
+  var correctAnswer = ["1998","Buck Showalter","2001","Luis Gonzalez","Purple and Teal",],
+  var selections = [];
+  var questions = $("#questions");
+
+  var timer: 20,
+
+  var numberCorrect: 0,
+  var numberIncorrect: 0,
+  var numberUnanswered: 0,
+
+function initialScreen() {
+  quizArea = "<a class='btn startButton' href='#' role='button'>Start Quiz</a>";
+  $("#quizArea").html(quizArea);
+  $("#quizResults").hide()
+
+}
+
+initialScreen();
 
 
-var questions = [{
-	question: ""
-	answers: [],
-	correctAnswer: 
-},{
-	question: ""
-	answers: []
-	correctAnswer:
-},{
-	question: ""
-	answers: []
-	correctAnswer:
-},{
-	question: ""
-	answers: []
-	correctAnswer:
-},{
-	question: ""
-	answers: []
-	correctAnswer:
-}];
+$("#startButton").on("click", function (event) {
+	event.preventDefault();
 
-var questionCounter = 0;
-var selections = [];
-var quiz = $("quizText")
-
-displayNext();
-
-$("#Next").on("click", function (a) {
-	a.preventDefault();
-
-	if(quiz.is(".animated")) {
-		return false;
-	}
-	choose();
-
-	if (isNaN(selections[questionCounter])) {
-		alert("Please Answer");
-	} else {
-		questionCounter++;
-		displayNext();
-	}
-	});
-	
-	$("#prev").on("click", function (a) {
-		a.preventDefault();
-
-		if(quiz.is(":animated")) {
-			return false;
-		}
-		choose();
-		questionCounter--;
-		displayNext();
- 	});
-
-	$("#start").on("click", function (a) {
-		a.preventDefault();
-
-		if(quiz.is(":animated")) {
-			return false;
-		}
-		questionCounter = 0;
-		selections = [];
-		displayNext();
-		$("#start").hide();
-	});
-
-
-	$('.button').on('mouseenter', function () {
-    	$(this).addClass('active');
-  	});
-  	$('.button').on('mouseleave', function () {
-    	$(this).removeClass('active');
- 	});
-  	
-  	function createQuestionElement(index) {
-  		var qElement = $("<div>", {
-  			id: "question"
-  		});
-
-  		var header = 
-  		qElement.append(header);
-
-  		var question = 
-  		qElement.append(question);
-
-  		var radioButtons = createRadios(index);
-  		qElement.append(radioButtons)
-  		 
-  		return qElement;
-  	}
-
-  	function createRadios(index) {
-  		var radioList = $("<ul>");
-  		var item;
-  		var input = "";
-  		for (var i = 0; i < questions[index].choices.length; i++) {
-  			item = $("<li>");
-  			input = "<input type="radio" name="answer" value=" + i + " />";
-  			input ++ questions[index].choices[i];
-  			item.append(input);
-  			radioList.append(item);
-  		}
-  		return radioList
-  	}
-
-  	function choose() {
-  		selections[questionCounter] = +$("input[name="answer"]:checked").val();
-  	}
-
-  	function displayNext() {
-  		quiz.fadeOut(function() {
-  			$("#question").remove();
-
-  			if(questionCounter < questions.length){
-  				var nextQuestion = createQuestionElement(questionCounter);
-  				quiz.append(nextQuestion).fadeIn();
-  				if (!(isNaN(selections[questionCounter]))) {
-  					$("input[value='+selections[questionCounter]+']").prop("checked", true);
-  				}
-  			if(questionCounter === 1){
-  				$("#prev").show();
-  			} else if(questionCounter === 0){
-
-  			$("#prev").hide();
-  			$("#next").show();
-  			}
-  		}else {
-  			var scoreElem = displayScore();
-  			quiz.append(scoreElem).fadeIn();
-  			$('#next').hide();
-        	$('#prev').hide();
-        	$('#start').show();
-  			}
-  		});
-  	}
-
-  	function displayScore() {
-  		var score = $("<p>",{id: "question"});
-
-  		var numCorrect = 0;
-  		for (var i = 0; i < selections.length; i++) {
-  			if (selections[i] === questions[i].correctAnswer) {
-  				numCorrect++;
-  			}
-  		}
-
-  		score.append("you got " + numCorrect + " quesitons out of " +
-  			questions.length + " right!");
-
-  		return score;
-  	};
-
-
-	
-
+  $(questionsandAnswers).html("<div")
 
 
 
